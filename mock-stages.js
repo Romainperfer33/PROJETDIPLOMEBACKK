@@ -1,7 +1,8 @@
 const stage = [
     { 
         id: 10,
-        intitulé: "Mix Session",
+        intitule: "Mix Session",
+        descriptif: "lorem lorem lorem lorem",
         places: 4,
         prix: 100,
         image:"",
@@ -11,7 +12,8 @@ const stage = [
 
     { 
         id: 11,
-        intitulé: "LSF Session",
+        intitule: "LSF Session",
+        descriptif: "lorem lorem lorem lorem",
         places: 4,
         prix: 100,
         image:"",
@@ -19,3 +21,5 @@ const stage = [
         date_heure_fin: {"jour":18, "mois":01, "année":2023, "heure":17 }
     }
 ]
+
+module.exports = stage

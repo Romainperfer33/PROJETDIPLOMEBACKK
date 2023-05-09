@@ -1,6 +1,6 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const stages = require ('../mock-stages')
-const stageModelSequelize = require ('../controllers/stageController')
+const stages = require('../mock-stages')
+const stageModelSequelize = require ('../models/stage')
 
 const sequelize = new Sequelize('Projet_stages', 'root', 'root', {
     host: 'localhost',
@@ -9,20 +9,20 @@ const sequelize = new Sequelize('Projet_stages', 'root', 'root', {
     port: 8889
 });
 
-const stageModel = stageModelSequelize (sequelize,DataTypes)
+
+const stageModel = stageModelSequelize(sequelize,DataTypes);
 
 const initDb = () => {
     return sequelize.sync({force: true}) 
     .then(() => {
-        // création des 11 coworkings dans la bdd, avec une boucle, 
-        // message à afficher en console : La liste des {11} coworkings a bien été créée.
-        coworkings.forEach((element) => {
-            CoworkingModel.create({
-                name: element.name,
-                price: element.price,
-                address: element.address,
-                superficy: element.superficy,
-                capacity: element.capacity,
+        stages.forEach((element) => {
+            stageModel.create({
+                intitule: element.intitule,
+                descriptif: element.descriptif,
+                places: element.places,
+                prix: element.prix,
+                date_heure_debut: element.date_heure_debut,
+                date_heure_fin: element.date_heure_fin,
             })
             })
         }
