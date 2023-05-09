@@ -2,7 +2,7 @@ const { Sequelize, DataTypes } = require('sequelize');
 const stages = require('../mock-stages')
 const stageModelSequelize = require ('../models/stage')
 
-const sequelize = new Sequelize('Projet_stages', 'root', 'root', {
+const sequelize = new Sequelize('projet_stages', 'root', 'root', {
     host: 'localhost',
     dialect: 'mysql',
     logging: false,
@@ -20,9 +20,7 @@ const initDb = () => {
                 intitule: element.intitule,
                 descriptif: element.descriptif,
                 places: element.places,
-                prix: element.prix,
-                date_heure_debut: element.date_heure_debut,
-                date_heure_fin: element.date_heure_fin,
+                prix: element.prix
             })
             })
         }

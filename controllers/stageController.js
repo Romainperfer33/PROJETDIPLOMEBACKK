@@ -6,11 +6,10 @@ exports.createStage = (req, res) => {
     let newStage = req.body;
         
         stageModel.create({
-        intitule: newStage.intitule,
-        places: newStage.places,
-        prix: newStage.prix,
-        date_heure_debut: newStage.date_heure_debut,
-        date_heure_fin: newStage.date_heure_fin,
+            intitule: newStage.intitule,
+            descriptif: newStage.descriptif,
+            places: newStage.places,
+            prix: newStage.prix
     }).then((el) => {
         const msg = 'Un coworking a bien été ajouté.'
         res.json({ message: msg, data: el })
