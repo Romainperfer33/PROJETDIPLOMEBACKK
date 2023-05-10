@@ -5,7 +5,8 @@ const stage = [
         descriptif: "lorem lorem lorem lorem",
         places: 4,
         prix: 100,
-        image:""
+        image:"affiche.jpg",
+        date_debut:"2023-05-01",
     },
 
     { 
@@ -14,7 +15,8 @@ const stage = [
         descriptif: "lorem lorem lorem lorem",
         places: 4,
         prix: 100,
-        image:""
+        image:"flyer.jpg",
+        date_debut:"2023-05-02",
     }
 ]
 

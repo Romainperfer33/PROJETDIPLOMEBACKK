@@ -20,7 +20,9 @@ const initDb = () => {
                 intitule: element.intitule,
                 descriptif: element.descriptif,
                 places: element.places,
-                prix: element.prix
+                prix: element.prix,
+                image: element.image,
+                date_debut: element.date_debut
             })
             })
         }

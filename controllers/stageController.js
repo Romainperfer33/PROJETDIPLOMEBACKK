@@ -9,7 +9,9 @@ exports.createStage = (req, res) => {
             intitule: newStage.intitule,
             descriptif: newStage.descriptif,
             places: newStage.places,
-            prix: newStage.prix
+            prix: newStage.prix,
+            image: newStage.image,
+            date_debut: newStage.date_debut,
     }).then((el) => {
         const msg = 'Un coworking a bien été ajouté.'
         res.json({ message: msg, data: el })

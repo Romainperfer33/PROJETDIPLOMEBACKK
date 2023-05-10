@@ -21,8 +21,14 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.JSON,
             allowNull: false,
         },
-        picture: {
+        image: {
             type: DataTypes.STRING,
-        }
+        },
+        date_debut: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            unique: true
+          },
+
     },)
 }
