@@ -1,6 +1,8 @@
+const bcrypt = require('bcrypt');
 const { Sequelize, DataTypes } = require('sequelize');
 const stages = require('../mock-stages')
 const stageModelSequelize = require ('../models/stage')
+const userModelSequelize = require ('../models/user')
 
 const sequelize = new Sequelize('projet_stages', 'root', 'root', {
     host: 'localhost',
@@ -11,6 +13,7 @@ const sequelize = new Sequelize('projet_stages', 'root', 'root', {
 
 
 const stageModel = stageModelSequelize(sequelize,DataTypes);
+const userModel = userModelSequelize(sequelize,DataTypes);
 
 const initDb = () => {
     return sequelize.sync({force: true}) 
@@ -23,11 +26,30 @@ const initDb = () => {
                 prix: element.prix,
                 image: element.image,
                 date_debut: element.date_debut
+                })
             })
+            bcrypt.hash('mdp', 10)
+            .then((hash) => {
+                userModel.create({
+                    username: 'paul',
+                    password: hash,
+                    roles: ['user', 'admin']
+                })
             })
-        }
+            .catch(err => console.log(err))
 
-)}
+            bcrypt.hash('mdp', 10)
+            .then((hash) => {
+                userModel.create({
+                    username: 'pierre',
+                    password: hash,
+                    roles: ['user']
+                })
+            })
+            .catch(err => console.log(err))
+        })
+        .catch(error => console.log(error))
+    }
 
 sequelize.authenticate()
     .then(() => console.log('La connexion à la base de données a bien été établie.'))

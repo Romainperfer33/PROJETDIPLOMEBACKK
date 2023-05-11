@@ -11,8 +11,10 @@
         .use(express.json())
 
     const stageRouter = require ('./routes/stageRoutes')
+    const userRouter = require ('./routes/userRoutes')
 
-    app.use('/api/stages',stageRouter)
+    app.use('/api/stages', stageRouter)
+    app.use('/api/users', userRouter)
     
     app.listen(port, () => {
         console.log(`L'app sur le port ${port}`)
