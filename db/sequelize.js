@@ -31,9 +31,9 @@ const initDb = () => {
             bcrypt.hash('mdp', 10)
             .then((hash) => {
                 userModel.create({
-                    username: 'paul',
+                    username: 'romain',
                     password: hash,
-                    roles: ['user', 'admin']
+                    roles: ['admin']
                 })
             })
             .catch(err => console.log(err))
@@ -41,7 +41,7 @@ const initDb = () => {
             bcrypt.hash('mdp', 10)
             .then((hash) => {
                 userModel.create({
-                    username: 'pierre',
+                    username: 'julie',
                     password: hash,
                     roles: ['user']
                 })
@@ -56,5 +56,5 @@ sequelize.authenticate()
     .catch(error => console.error(`Impossible de se connecter à la base de données ${error}`))
 
 module.exports = {
-    sequelize, stageModel,initDb
+    sequelize, stageModel, userModel, initDb
 }

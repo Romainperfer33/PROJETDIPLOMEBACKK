@@ -1,4 +1,5 @@
     const express = require('express')
+    const cors = require('cors')
     const app = express()
     const morgan = require('morgan')
     const sequelize = require('./db/sequelize')
@@ -9,6 +10,7 @@
     app
         .use(morgan('dev'))
         .use(express.json())
+        .use(cors())
 
     const stageRouter = require ('./routes/stageRoutes')
     const userRouter = require ('./routes/userRoutes')

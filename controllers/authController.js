@@ -1,15 +1,16 @@
 const { Op, UniqueConstraintError, ValidationError } = require('sequelize');
-const { userModel} = require('../db/sequelize')
+const { userModel } = require('../db/sequelize')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const privatekey = require ('../auth/private_key')
 
 exports.login = (req, res) => {
     if(!req.body.username || !req.body.password){
         const msg = "Veuillez fournir un nom d'utilisateur et un mot de passe."
         return res.status(400).json({message: msg})
     }
-    
-    userModel.findOne({ where : {username: req.body.username}})
+
+    userModel.findOne({ where : {username: req.body.username}}) 
         .then(user => {
             if(!user){
                 const msg = "L'utilisateur demandé n'existe pas."
@@ -26,7 +27,7 @@ exports.login = (req, res) => {
                     // json web token
                     const token = jwt.sign({
                         data: user.id
-                      }, privateKey, { expiresIn: '1h' });
+                      }, privatekey, { expiresIn: '1h' });
 
                     const msg = "L'utilisateur a été connecté avec succès."
                     user.password = "hidden"
