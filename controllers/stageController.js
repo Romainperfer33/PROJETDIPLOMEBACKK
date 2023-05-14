@@ -13,7 +13,7 @@ exports.createStage = (req, res) => {
             image: newStage.image,
             date_debut: newStage.date_debut,
     }).then((el) => {
-        const msg = 'Un coworking a bien été ajouté.'
+        const msg = 'Un stage a bien été ajouté.'
         res.json({ message: msg, data: el })
     }).catch(error => {
         if(error instanceof UniqueConstraintError || error instanceof ValidationError){
