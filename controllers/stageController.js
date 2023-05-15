@@ -79,3 +79,26 @@ exports.findStages = (req, res) => {
         const msg = 'La liste des stages a bien été récupérée en base de données.'
         res.json({message: msg, data: elements})
 })} 
+
+exports.updateStage = (req, res) => {
+    // Modifier le coworking en base de données qui correspond à l'id spécifé dans les params
+    stageModel.update(req.body, {
+        where: {
+            id: req.params.id
+        }
+    }).then((stage) => {
+        if(stage === null){
+            const msg = "Le stage demandé n'existe pas."
+            res.json({message: msg})
+        } else {
+            const msg = "Le stage a bien été modifié."
+            res.json({message: msg, data: coworking})
+        }
+    }).catch((error) => {
+        if(error instanceof UniqueConstraintError || error instanceof ValidationError){
+            return res.status(400).json({message: error.message, data: error})
+        } 
+        const msg = "Impossible de mettre à jour le coworking."
+        res.status(500).json({message: msg})
+    })
+}

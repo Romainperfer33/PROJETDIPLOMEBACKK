@@ -9,8 +9,9 @@ router
     .post(stageController.createStage)
 
 router
-.route('/:id')
-.get(stageController.findStageByPk)
-.delete(stageController.deleteStage);
+    .route('/:id')
+    .get(stageController.findStageByPk)
+    .put(stageController.updateStage)
+    .delete(stageController.deleteStage);
 
 module.exports = router; 
