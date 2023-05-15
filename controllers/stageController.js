@@ -1,6 +1,7 @@
 let stages = require('../mock-stages')
 const { Op, UniqueConstraintError, ValidationError, QueryTypes } = require('sequelize');
-const { stageModel, sequelize } = require('../db/sequelize')
+const { stageModel, sequelize } = require('../db/sequelize');
+const stage = require('../models/stage');
 
 exports.createStage = (req, res) => {
     let newStage = req.body;
@@ -26,3 +27,55 @@ exports.createStage = (req, res) => {
         res.status(500).json(error)
     })
 }
+
+exports.deleteStage = (req, res) => {
+    stageModel.findByPk(req.params.id)
+        .then(stage => {
+            if (stage === null) {
+                const message = `Le coworking demandé n'existe pas.`
+                return res.status(404).json({ message })
+            }
+            return stageModel.destroy({
+                where: {
+                    id: req.params.id
+                }
+            })
+                .then(() => {
+                    const message = `Le stage ${stage.name} a bien été supprimé.`
+                    res.json({ message, data: coworking });
+                })
+        })
+        .catch(error => {
+            const message = `Impossible de supprimer le stage.`
+            res.status(500).json({ message, data: error })
+        })
+}
+
+exports.findStageByPk = (req, res) => {
+    // Afficher le coworking correspondant à l'id en params, en le récupérant dans la bdd     findByPk()
+    stageModel.findByPk(req.params.id)
+        .then(stage => {
+            if (stage === null) {
+                const message = `Le stage demandé n'existe pas.`
+                res.status(404).json({ message })
+            } else {
+                const message = "Un stage a bien été trouvé."
+                res.json({ message, data: stage });
+            }
+        })
+        .catch(error => {
+            const message = `La liste des stages n'a pas pu se charger. Reessayez ulterieurement.`
+            res.status(500).json({ message, data: error })
+        })
+}
+
+exports.findStages = (req, res) => {
+    stageModel.findAll()
+    .then((elements)=>{
+        console.log(elements)
+        if(!elements.length){
+            return res.json({message: "Aucun stage ne correspond à votre recherche"})    
+        }
+        const msg = 'La liste des stages a bien été récupérée en base de données.'
+        res.json({message: msg, data: elements})
+})} 

@@ -5,6 +5,12 @@ const stageController = require('../controllers/stageController')
 
 router
     .route('/')
+    .get(stageController.findStages)
     .post(stageController.createStage)
 
-    module.exports = router; 
+router
+.route('/:id')
+.get(stageController.findStageByPk)
+.delete(stageController.deleteStage);
+
+module.exports = router; 
