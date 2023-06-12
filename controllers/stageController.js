@@ -5,7 +5,6 @@ const stage = require('../models/stage');
 
 exports.createStage = (req, res) => {
     let newStage = req.body;
-    console.log("newStage: ", newStage);
         stageModel.create({
             intitule: newStage.intitule,
             descriptif: newStage.descriptif,
@@ -15,12 +14,10 @@ exports.createStage = (req, res) => {
             date_debut: newStage.date_debut,
             
     }).then((el) => {
-        console.log("stage créé: ", el);
         const msg = 'Un stage a bien été ajouté.'
         res.json({ message: msg, data: el })
 
     }).catch(error => {
-        console.log("erreur lors de la création du stage: ", error);
         if(error instanceof UniqueConstraintError || error instanceof ValidationError){
             return res.status(400).json({message: error.message, data: error})
         } 
@@ -32,7 +29,7 @@ exports.deleteStage = (req, res) => {
     stageModel.findByPk(req.params.id)
         .then(stage => {
             if (stage === null) {
-                const message = `Le coworking demandé n'existe pas.`
+                const message = `Le stage demandé n'existe pas.`
                 return res.status(404).json({ message })
             }
             return stageModel.destroy({
